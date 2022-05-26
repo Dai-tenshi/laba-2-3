@@ -4,7 +4,7 @@ def romeNumber(x):
     hunds = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM"]
     thous = ["","M","MM","MMM","MMMM"]
 
-    t = thous[x // 1000]
+    t = thous[x // 1000 % 10]
     h = hunds[x // 100 % 10]
     te = tens[x // 10 % 10]
     o =  ones[x % 10]
@@ -55,11 +55,12 @@ try:
                 number_flag = False
         ##вызываем саму функцию
         numInt = [int(x) for x in work_buffer]       
-        for x in range(len(numInt)):
-            print(romeNumber(numInt[x]))
+        for x in numInt:
+            print(romeNumber(x))
         finish = time.time()
         result = finish - start
         print("Program time: " + str(result) + " seconds.")        
 except FileNotFoundError:
     print("\nФайл text.txt в директории проекта не обнаружен.\nДобавьте файл в директорию или переименуйте существующий *.txt файл.") 
-    
+except ValueError:
+    print("\nФайл не содержит цифр или присутствуют не только числа")
